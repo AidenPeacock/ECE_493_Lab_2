@@ -1,0 +1,2 @@
+prefix_rule(pattern=["git", "fetch", "--all", "--prune"], decision="allow")
+prefix_rule(pattern=["git", "ls-remote", "--heads", "origin"], decision="allow")
