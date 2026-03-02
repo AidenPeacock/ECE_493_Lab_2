@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conference Access</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1 class="page-title">Conference Account Access</h1>
+
+      <div class="layout-grid">
+        <section id="form-container" class="card" aria-live="polite">
+          <h2>Register User Account</h2>
+          <p class="helper">Fields marked <span aria-hidden="true">*</span> are required.</p>
+
+          <div id="error-summary" class="error-summary" hidden></div>
+
+          <form id="register-form" novalidate>
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+            <p id="email-error" class="field-error" hidden></p>
+
+            <label for="password">Password *</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" required />
+            <small class="helper">Minimum 8 characters with at least one letter and one number.</small>
+            <p id="password-error" class="field-error" hidden></p>
+
+            <label for="role">Role *</label>
+            <select id="role" name="role" required>
+              <option value="">Select a role</option>
+              <option value="author">Author</option>
+              <option value="reviewer">Reviewer</option>
+              <option value="editor">Editor</option>
+              <option value="attendee">Attendee</option>
+            </select>
+            <p id="role-error" class="field-error" hidden></p>
+
+            <button type="submit">Create account</button>
+          </form>
+        </section>
+
+        <section id="success-container" class="card success" hidden aria-live="polite">
+          <h2>Registration complete</h2>
+          <p id="success-message"></p>
+          <p>You can now sign in using your new account.</p>
+        </section>
+
+        <section id="login-form-container" class="card" aria-live="polite">
+          <h2>Log In</h2>
+          <p class="helper">Use a registered email and password.</p>
+
+          <div id="login-error-summary" class="error-summary" hidden></div>
+
+          <form id="login-form" novalidate>
+            <label for="login-email">Email *</label>
+            <input id="login-email" name="login-email" type="email" autocomplete="username" required />
+            <p id="login-email-error" class="field-error" hidden></p>
+
+            <label for="login-password">Password *</label>
+            <input
+              id="login-password"
+              name="login-password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+            <p id="login-password-error" class="field-error" hidden></p>
+
+            <button type="submit">Log in</button>
+          </form>
+        </section>
+
+        <section id="login-success-container" class="card success" hidden aria-live="polite">
+          <h2>Login complete</h2>
+          <p id="login-success-message"></p>
+          <p>Role-appropriate home view is available.</p>
+        </section>
+
+        <section id="change-password-form-container" class="card" aria-live="polite">
+          <h2>Change Password</h2>
+          <p class="helper">You must be logged in to change password.</p>
+
+          <div id="change-password-error-summary" class="error-summary" hidden></div>
+
+          <form id="change-password-form" novalidate>
+            <label for="current-password">Current Password *</label>
+            <input
+              id="current-password"
+              name="current-password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+            <p id="current-password-error" class="field-error" hidden></p>
+
+            <label for="new-password">New Password *</label>
+            <input
+              id="new-password"
+              name="new-password"
+              type="password"
+              autocomplete="new-password"
+              required
+            />
+            <small class="helper">Minimum 8 characters with at least one letter and one number.</small>
+            <p id="new-password-error" class="field-error" hidden></p>
+
+            <button type="submit">Change password</button>
+          </form>
+        </section>
+
+        <section id="change-password-success-container" class="card success" hidden aria-live="polite">
+          <h2>Password changed</h2>
+          <p id="change-password-success-message"></p>
+          <p>You can continue using your account with the new password.</p>
+        </section>
+
+        <section id="submit-paper-form-container" class="card" aria-live="polite">
+          <h2>Submit Paper Manuscript</h2>
+          <p class="helper">Provide all required metadata and a manuscript file (max 7MB).</p>
+
+          <div id="submit-paper-error-summary" class="error-summary" hidden></div>
+
+          <form id="submit-paper-form" novalidate>
+            <label for="submit-paper-authors">Authors *</label>
+            <input id="submit-paper-authors" name="submit-paper-authors" type="text" required />
+            <p id="submit-paper-authors-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-affiliations">Affiliations *</label>
+            <input id="submit-paper-affiliations" name="submit-paper-affiliations" type="text" required />
+            <p id="submit-paper-affiliations-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-contact-email">Contact Email *</label>
+            <input id="submit-paper-contact-email" name="submit-paper-contact-email" type="email" required />
+            <p id="submit-paper-contact-email-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-abstract">Abstract *</label>
+            <textarea id="submit-paper-abstract" name="submit-paper-abstract" rows="4" required></textarea>
+            <p id="submit-paper-abstract-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-keywords">Keywords *</label>
+            <input id="submit-paper-keywords" name="submit-paper-keywords" type="text" required />
+            <p id="submit-paper-keywords-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-main-source">Main Source *</label>
+            <select id="submit-paper-main-source" name="submit-paper-main-source" required>
+              <option value="">Select source</option>
+              <option value="pdf">PDF</option>
+              <option value="word">Word</option>
+              <option value="latex">LaTeX</option>
+            </select>
+            <p id="submit-paper-main-source-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-file">Manuscript File *</label>
+            <input id="submit-paper-file" name="submit-paper-file" type="file" accept=".pdf,.doc,.docx,.tex" required />
+            <p id="submit-paper-file-error" class="field-error" hidden></p>
+
+            <button type="submit">Submit manuscript</button>
+          </form>
+        </section>
+
+        <section id="submit-paper-success-container" class="card success" hidden aria-live="polite">
+          <h2>Submission complete</h2>
+          <p id="submit-paper-success-message"></p>
+          <p>Your manuscript has been stored successfully.</p>
+        </section>
+
+        <section id="save-draft-form-container" class="card" aria-live="polite">
+          <h2>Save Submission Draft</h2>
+          <p class="helper">Save your draft and return later to complete submission.</p>
+
+          <div id="save-draft-error-summary" class="error-summary" hidden></div>
+
+          <form id="save-draft-form" novalidate>
+            <label for="save-draft-title">Draft Title *</label>
+            <input id="save-draft-title" name="save-draft-title" type="text" required />
+            <p id="save-draft-title-error" class="field-error" hidden></p>
+
+            <label for="save-draft-contact-email">Contact Email *</label>
+            <input id="save-draft-contact-email" name="save-draft-contact-email" type="email" required />
+            <p id="save-draft-contact-email-error" class="field-error" hidden></p>
+
+            <label for="save-draft-abstract">Abstract</label>
+            <textarea id="save-draft-abstract" name="save-draft-abstract" rows="4"></textarea>
+
+            <label for="save-draft-keywords">Keywords</label>
+            <input id="save-draft-keywords" name="save-draft-keywords" type="text" />
+            <small class="helper">Use comma-separated keywords without empty entries.</small>
+            <p id="save-draft-keywords-error" class="field-error" hidden></p>
+
+            <label for="save-draft-main-source">Main Source</label>
+            <select id="save-draft-main-source" name="save-draft-main-source">
+              <option value="">Select source</option>
+              <option value="pdf">PDF</option>
+              <option value="word">Word</option>
+              <option value="latex">LaTeX</option>
+            </select>
+
+            <button type="submit">Save draft</button>
+          </form>
+        </section>
+
+        <section id="save-draft-success-container" class="card success" hidden aria-live="polite">
+          <h2>Draft saved</h2>
+          <p id="save-draft-success-message"></p>
+          <p>You can continue editing this draft later.</p>
+        </section>
+
+        <section id="assign-referees-form-container" class="card" aria-live="polite">
+          <h2>Assign Referees</h2>
+          <p class="helper">Assign exactly three referees with current assignment counts below 5.</p>
+
+          <div id="assign-referees-error-summary" class="error-summary" hidden></div>
+
+          <form id="assign-referees-form" novalidate>
+            <label for="assign-referees-paper-id">Paper ID *</label>
+            <input id="assign-referees-paper-id" name="assign-referees-paper-id" type="text" required />
+            <p id="assign-referees-paper-id-error" class="field-error" hidden></p>
+
+            <label for="assign-referees-referee-1-email">Referee 1 Email *</label>
+            <input id="assign-referees-referee-1-email" name="assign-referees-referee-1-email" type="email" required />
+            <label for="assign-referees-referee-1-load">Referee 1 Current Assigned Papers *</label>
+            <input
+              id="assign-referees-referee-1-load"
+              name="assign-referees-referee-1-load"
+              type="number"
+              min="0"
+              required
+            />
+            <p id="assign-referees-referee-1-error" class="field-error" hidden></p>
+
+            <label for="assign-referees-referee-2-email">Referee 2 Email *</label>
+            <input id="assign-referees-referee-2-email" name="assign-referees-referee-2-email" type="email" required />
+            <label for="assign-referees-referee-2-load">Referee 2 Current Assigned Papers *</label>
+            <input
+              id="assign-referees-referee-2-load"
+              name="assign-referees-referee-2-load"
+              type="number"
+              min="0"
+              required
+            />
+            <p id="assign-referees-referee-2-error" class="field-error" hidden></p>
+
+            <label for="assign-referees-referee-3-email">Referee 3 Email *</label>
+            <input id="assign-referees-referee-3-email" name="assign-referees-referee-3-email" type="email" required />
+            <label for="assign-referees-referee-3-load">Referee 3 Current Assigned Papers *</label>
+            <input
+              id="assign-referees-referee-3-load"
+              name="assign-referees-referee-3-load"
+              type="number"
+              min="0"
+              required
+            />
+            <p id="assign-referees-referee-3-error" class="field-error" hidden></p>
+
+            <p id="assign-referees-referees-error" class="field-error" hidden></p>
+
+            <button type="submit">Assign referees</button>
+          </form>
+        </section>
+
+        <section id="assign-referees-success-container" class="card success" hidden aria-live="polite">
+          <h2>Referees assigned</h2>
+          <p id="assign-referees-success-message"></p>
+          <p>Invitations are now pending referee responses.</p>
+        </section>
+
+        <section id="review-invitation-form-container" class="card" aria-live="polite">
+          <h2>Accept/Reject Review Invitation</h2>
+          <p class="helper">Referees can accept or reject a valid invitation.</p>
+
+          <div id="review-invitation-error-summary" class="error-summary" hidden></div>
+
+          <form id="review-invitation-form" novalidate>
+            <label for="review-invitation-id">Invitation ID *</label>
+            <input id="review-invitation-id" name="review-invitation-id" type="text" required />
+            <p id="review-invitation-id-error" class="field-error" hidden></p>
+
+            <label for="review-invitation-paper-id">Paper ID *</label>
+            <input id="review-invitation-paper-id" name="review-invitation-paper-id" type="text" required />
+            <p id="review-invitation-paper-id-error" class="field-error" hidden></p>
+
+            <label for="review-invitation-email">Referee Email *</label>
+            <input id="review-invitation-email" name="review-invitation-email" type="email" required />
+            <p id="review-invitation-email-error" class="field-error" hidden></p>
+
+            <label for="review-invitation-decision">Decision *</label>
+            <select id="review-invitation-decision" name="review-invitation-decision" required>
+              <option value="">Select decision</option>
+              <option value="accept">Accept</option>
+              <option value="reject">Reject</option>
+            </select>
+            <p id="review-invitation-decision-error" class="field-error" hidden></p>
+
+            <label for="review-invitation-reviewer-count">Current Reviewer Count *</label>
+            <input
+              id="review-invitation-reviewer-count"
+              name="review-invitation-reviewer-count"
+              type="number"
+              min="0"
+              required
+            />
+
+            <label for="review-invitation-expires-at">Invitation Expires At (ISO timestamp) *</label>
+            <input
+              id="review-invitation-expires-at"
+              name="review-invitation-expires-at"
+              type="text"
+              placeholder="2026-12-31T23:59:59.000Z"
+              required
+            />
+
+            <label for="review-invitation-valid">
+              <input id="review-invitation-valid" name="review-invitation-valid" type="checkbox" checked />
+              Invitation is currently valid
+            </label>
+            <p id="review-invitation-state-error" class="field-error" hidden></p>
+
+            <button type="submit">Submit decision</button>
+          </form>
+        </section>
+
+        <section id="review-invitation-success-container" class="card success" hidden aria-live="polite">
+          <h2>Decision recorded</h2>
+          <p id="review-invitation-success-message"></p>
+          <p>The invitation decision has been stored.</p>
+        </section>
+
+        <section id="submit-review-form-container" class="card" aria-live="polite">
+          <h2>Submit Paper Review</h2>
+          <p class="helper">Submit a complete review only after accepting the invitation.</p>
+
+          <div id="submit-review-error-summary" class="error-summary" hidden></div>
+
+          <form id="submit-review-form" novalidate>
+            <label for="submit-review-paper-id">Paper ID *</label>
+            <input id="submit-review-paper-id" name="submit-review-paper-id" type="text" required />
+            <p id="submit-review-paper-id-error" class="field-error" hidden></p>
+
+            <label for="submit-review-referee-email">Referee Email *</label>
+            <input id="submit-review-referee-email" name="submit-review-referee-email" type="email" required />
+            <p id="submit-review-referee-email-error" class="field-error" hidden></p>
+
+            <label for="submit-review-score">Score (1-10) *</label>
+            <input id="submit-review-score" name="submit-review-score" type="number" min="1" max="10" required />
+            <p id="submit-review-score-error" class="field-error" hidden></p>
+
+            <label for="submit-review-comments">Comments *</label>
+            <textarea id="submit-review-comments" name="submit-review-comments" rows="4" required></textarea>
+            <p id="submit-review-comments-error" class="field-error" hidden></p>
+
+            <label for="submit-review-invitation-accepted">
+              <input
+                id="submit-review-invitation-accepted"
+                name="submit-review-invitation-accepted"
+                type="checkbox"
+              />
+              I have accepted the review invitation
+            </label>
+            <p id="submit-review-invitation-error" class="field-error" hidden></p>
+
+            <button type="submit">Submit review</button>
+          </form>
+        </section>
+
+        <section id="submit-review-success-container" class="card success" hidden aria-live="polite">
+          <h2>Review submitted</h2>
+          <p id="submit-review-success-message"></p>
+          <p>The editor can now view your review.</p>
+        </section>
+
+        <section id="make-final-decision-form-container" class="card" aria-live="polite">
+          <h2>Make Final Decision</h2>
+          <p class="helper">Editors can record one final decision after three completed reviews.</p>
+
+          <div id="make-final-decision-error-summary" class="error-summary" hidden></div>
+
+          <form id="make-final-decision-form" novalidate>
+            <label for="make-final-decision-paper-id">Paper ID *</label>
+            <input id="make-final-decision-paper-id" name="make-final-decision-paper-id" type="text" required />
+            <p id="make-final-decision-paper-id-error" class="field-error" hidden></p>
+
+            <label for="make-final-decision-editor-email">Editor Email *</label>
+            <input
+              id="make-final-decision-editor-email"
+              name="make-final-decision-editor-email"
+              type="email"
+              required
+            />
+            <p id="make-final-decision-editor-email-error" class="field-error" hidden></p>
+
+            <label for="make-final-decision-decision">Decision *</label>
+            <select id="make-final-decision-decision" name="make-final-decision-decision" required>
+              <option value="">Select decision</option>
+              <option value="accept">Accept</option>
+              <option value="reject">Reject</option>
+              <option value="revise">Revise</option>
+            </select>
+            <p id="make-final-decision-decision-error" class="field-error" hidden></p>
+
+            <label for="make-final-decision-review-count">Completed Review Count *</label>
+            <input
+              id="make-final-decision-review-count"
+              name="make-final-decision-review-count"
+              type="number"
+              min="3"
+              required
+            />
+            <p id="make-final-decision-review-count-error" class="field-error" hidden></p>
+
+            <label for="make-final-decision-notification-delivered">
+              <input
+                id="make-final-decision-notification-delivered"
+                name="make-final-decision-notification-delivered"
+                type="checkbox"
+                checked
+              />
+              Author notification delivered successfully
+            </label>
+            <p id="make-final-decision-notification-error" class="field-error" hidden></p>
+
+            <button type="submit">Record final decision</button>
+          </form>
+        </section>
+
+        <section id="make-final-decision-success-container" class="card success" hidden aria-live="polite">
+          <h2>Final decision recorded</h2>
+          <p id="make-final-decision-success-message"></p>
+          <p>The author notification has been captured in the audit log.</p>
+        </section>
+
+        <section id="generate-schedule-form-container" class="card" aria-live="polite">
+          <h2>Generate Schedule</h2>
+          <p class="helper">Generate an HTML schedule from accepted papers and notify authors.</p>
+
+          <div id="generate-schedule-error-summary" class="error-summary" hidden></div>
+
+          <form id="generate-schedule-form" novalidate>
+            <label for="generate-schedule-organizer-email">Organizer Email *</label>
+            <input
+              id="generate-schedule-organizer-email"
+              name="generate-schedule-organizer-email"
+              type="email"
+              required
+            />
+            <p id="generate-schedule-organizer-email-error" class="field-error" hidden></p>
+
+            <label for="generate-schedule-start-time">Conference Start Time (ISO) *</label>
+            <input
+              id="generate-schedule-start-time"
+              name="generate-schedule-start-time"
+              type="text"
+              placeholder="2026-08-01T09:00:00.000Z"
+              required
+            />
+            <p id="generate-schedule-start-time-error" class="field-error" hidden></p>
+
+            <label for="generate-schedule-slot-minutes">Slot Length Minutes *</label>
+            <input
+              id="generate-schedule-slot-minutes"
+              name="generate-schedule-slot-minutes"
+              type="number"
+              min="1"
+              required
+            />
+            <p id="generate-schedule-slot-minutes-error" class="field-error" hidden></p>
+
+            <label for="generate-schedule-algorithm-ready">
+              <input
+                id="generate-schedule-algorithm-ready"
+                name="generate-schedule-algorithm-ready"
+                type="checkbox"
+                checked
+              />
+              Scheduling algorithm completed successfully
+            </label>
+            <p id="generate-schedule-algorithm-error" class="field-error" hidden></p>
+
+            <label for="generate-schedule-email-ready">
+              <input
+                id="generate-schedule-email-ready"
+                name="generate-schedule-email-ready"
+                type="checkbox"
+                checked
+              />
+              Author notification delivery succeeded
+            </label>
+            <p id="generate-schedule-email-error" class="field-error" hidden></p>
+            <p id="generate-schedule-accepted-papers-error" class="field-error" hidden></p>
+
+            <button type="submit">Generate schedule</button>
+          </form>
+        </section>
+
+        <section id="generate-schedule-success-container" class="card success" hidden aria-live="polite">
+          <h2>Schedule generated</h2>
+          <p id="generate-schedule-success-message"></p>
+          <div id="generate-schedule-generated-html" class="helper"></div>
+        </section>
+
+        <section id="edit-publish-schedule-form-container" class="card" aria-live="polite">
+          <h2>Edit &amp; Publish Schedule</h2>
+          <p class="helper">Edit entries, validate conflicts, and publish the next schedule version.</p>
+
+          <div id="edit-publish-schedule-error-summary" class="error-summary" hidden></div>
+
+          <form id="edit-publish-schedule-form" novalidate>
+            <label for="edit-publish-schedule-id">Schedule ID *</label>
+            <input id="edit-publish-schedule-id" name="edit-publish-schedule-id" type="text" required />
+            <p id="edit-publish-schedule-id-error" class="field-error" hidden></p>
+
+            <label for="edit-publish-schedule-version">Version *</label>
+            <input
+              id="edit-publish-schedule-version"
+              name="edit-publish-schedule-version"
+              type="number"
+              min="1"
+              required
+            />
+            <p id="edit-publish-schedule-version-error" class="field-error" hidden></p>
+
+            <label for="edit-publish-schedule-entries">Entries JSON *</label>
+            <textarea
+              id="edit-publish-schedule-entries"
+              name="edit-publish-schedule-entries"
+              rows="8"
+              placeholder='[{"entry_id":"e1","title":"Opening","room":"A","start_time":"2026-08-01T09:00:00.000Z","end_time":"2026-08-01T09:30:00.000Z"}]'
+              required
+            ></textarea>
+            <p id="edit-publish-schedule-entries-error" class="field-error" hidden></p>
+
+            <label for="edit-publish-schedule-simulate-save-failure">
+              <input
+                id="edit-publish-schedule-simulate-save-failure"
+                name="edit-publish-schedule-simulate-save-failure"
+                type="checkbox"
+              />
+              Simulate Save Failure
+            </label>
+            <p id="edit-publish-schedule-save-error" class="field-error" hidden></p>
+
+            <label for="edit-publish-schedule-simulate-announcement-failure">
+              <input
+                id="edit-publish-schedule-simulate-announcement-failure"
+                name="edit-publish-schedule-simulate-announcement-failure"
+                type="checkbox"
+              />
+              Simulate Announcement Failure
+            </label>
+            <p id="edit-publish-schedule-announcement-error" class="field-error" hidden></p>
+
+            <button type="submit">Publish schedule</button>
+          </form>
+        </section>
+
+        <section id="edit-publish-schedule-success-container" class="card success" hidden aria-live="polite">
+          <h2>Schedule published</h2>
+          <p id="edit-publish-schedule-success-message"></p>
+          <p id="edit-publish-schedule-success-meta"></p>
+        </section>
+
+        <section id="pay-attendance-form-container" class="card" aria-live="polite">
+          <h2>Pay for Attendance &amp; Receive Ticket</h2>
+          <p class="helper">Complete payment to receive your conference attendance ticket.</p>
+
+          <div id="pay-attendance-error-summary" class="error-summary" hidden></div>
+
+          <form id="pay-attendance-form" novalidate>
+            <label for="pay-attendance-email">Attendee Email *</label>
+            <input id="pay-attendance-email" name="pay-attendance-email" type="email" required />
+            <p id="pay-attendance-email-error" class="field-error" hidden></p>
+
+            <label for="pay-attendance-tier">Ticket Tier *</label>
+            <select id="pay-attendance-tier" name="pay-attendance-tier" required>
+              <option value="">Select tier</option>
+              <option value="student">Student ($50)</option>
+              <option value="regular">Regular ($100)</option>
+              <option value="vip">VIP ($200)</option>
+            </select>
+            <p id="pay-attendance-tier-error" class="field-error" hidden></p>
+
+            <label for="pay-attendance-card-last4">Card Last 4 Digits *</label>
+            <input
+              id="pay-attendance-card-last4"
+              name="pay-attendance-card-last4"
+              type="text"
+              maxlength="4"
+              required
+            />
+            <p id="pay-attendance-card-error" class="field-error" hidden></p>
+
+            <label for="pay-attendance-amount">Amount *</label>
+            <input id="pay-attendance-amount" name="pay-attendance-amount" type="number" min="1" required />
+            <p id="pay-attendance-amount-error" class="field-error" hidden></p>
+
+            <label for="pay-attendance-registration-open">
+              <input id="pay-attendance-registration-open" name="pay-attendance-registration-open" type="checkbox" />
+              Registration is open
+            </label>
+            <p id="pay-attendance-registration-error" class="field-error" hidden></p>
+
+            <label for="pay-attendance-gateway-ready">
+              <input id="pay-attendance-gateway-ready" name="pay-attendance-gateway-ready" type="checkbox" />
+              Payment gateway available
+            </label>
+            <p id="pay-attendance-gateway-error" class="field-error" hidden></p>
+
+            <label for="pay-attendance-payment-approved">
+              <input id="pay-attendance-payment-approved" name="pay-attendance-payment-approved" type="checkbox" />
+              Payment approved
+            </label>
+            <p id="pay-attendance-payment-error" class="field-error" hidden></p>
+
+            <label for="pay-attendance-email-delivery-ready">
+              <input
+                id="pay-attendance-email-delivery-ready"
+                name="pay-attendance-email-delivery-ready"
+                type="checkbox"
+              />
+              Confirmation delivery ready
+            </label>
+            <p id="pay-attendance-email-delivery-error" class="field-error" hidden></p>
+
+            <button type="submit">Pay and issue ticket</button>
+          </form>
+        </section>
+
+        <section id="pay-attendance-success-container" class="card success" hidden aria-live="polite">
+          <h2>Payment completed</h2>
+          <p id="pay-attendance-success-message"></p>
+          <p id="pay-attendance-ticket-message"></p>
+        </section>
+      </div>
+    </main>
+
+    <script type="module">
+      import { initRegistrationApp } from "./js/register.js";
+      import { initLoginApp } from "./js/002-log-in.js";
+      import { initChangePasswordApp } from "./js/003-change-password.js";
+      import { initSubmitPaperManuscriptApp } from "./js/004-submit-paper-manuscript.js";
+      import { initSaveSubmissionDraftApp } from "./js/005-save-submission-draft.js";
+      import { initAssignRefereesApp } from "./js/006-assign-referees.js";
+      import { initAcceptRejectReviewInvitationApp } from "./js/007-accept-reject-review-invitation.js";
+      import { initSubmitPaperReviewApp } from "./js/008-submit-paper-review.js";
+      import { initMakeFinalDecisionApp } from "./js/009-make-final-decision.js";
+      import { initGenerateScheduleApp } from "./js/010-generate-schedule.js";
+      import { initEditPublishScheduleApp } from "./js/011-edit-publish-schedule.js";
+      import { initPayForAttendanceAndReceiveTicketApp } from "./js/012-pay-for-attendance-receive-ticket.js";
+      import { initAccessControl } from "./js/access-control.js";
+
+      initRegistrationApp();
+      initLoginApp();
+      initChangePasswordApp();
+      initSubmitPaperManuscriptApp();
+      initSaveSubmissionDraftApp();
+      initAssignRefereesApp();
+      initAcceptRejectReviewInvitationApp();
+      initSubmitPaperReviewApp();
+      initMakeFinalDecisionApp();
+      initGenerateScheduleApp();
+      initEditPublishScheduleApp();
+      initPayForAttendanceAndReceiveTicketApp();
+      initAccessControl();
+    </script>
+  </body>
+</html>
