@@ -1,0 +1,16 @@
+node_modules/
+coverage/
+dist/
+build/
+*.log
+.env*
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
