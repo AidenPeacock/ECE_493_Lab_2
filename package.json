@@ -1,0 +1,10 @@
+{
+  "name": "ece-493-lab-2",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --experimental-test-coverage tests/*.test.js",
+    "lint": "node --check src/js/register.js && node --check src/js/002-log-in.js && node --check src/js/003-change-password.js && node --check src/js/004-submit-paper-manuscript.js && node --check src/js/005-save-submission-draft.js && node --check src/js/006-assign-referees.js && node --check src/js/007-accept-reject-review-invitation.js && node --check src/js/008-submit-paper-review.js && node --check src/js/access-control.js && node --check tests/register.test.js && node --check tests/login.test.js && node --check tests/change-password.test.js && node --check tests/submit-paper-manuscript.test.js && node --check tests/save-submission-draft.test.js && node --check tests/assign-referees.test.js && node --check tests/accept-reject-review-invitation.test.js && node --check tests/submit-paper-review.test.js && node --check tests/access-control.test.js"
+  }
+}
