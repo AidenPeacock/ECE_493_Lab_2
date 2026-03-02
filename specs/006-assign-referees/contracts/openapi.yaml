@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: Assign Referees API
+  version: 1.0.0
+  description: Contract for assign referees flow.
+servers:
+  - url: http://localhost
+paths:
+  /assign-referees:
+    post:
+      summary: Assign Referees
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Request'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Storage or service failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Request:
+      type: object
+      properties:
+        payload:
+          type: object
+    Success:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+        field_errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              code:
+                type: string
+              message:
+                type: string

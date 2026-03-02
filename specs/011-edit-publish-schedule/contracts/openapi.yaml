@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: Edit & Publish Schedule API
+  version: 1.0.0
+  description: Contract for edit & publish schedule flow (demo).
+servers:
+  - url: http://localhost
+paths:
+  /edit-publish-schedule:
+    post:
+      summary: Edit & Publish Schedule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditPublishScheduleRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditPublishScheduleSuccess'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditPublishScheduleError'
+        '409':
+          description: Conflict error (e.g., room/time collision)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditPublishScheduleError'
+        '503':
+          description: Storage or announcement failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditPublishScheduleError'
+components:
+  schemas:
+    EditPublishScheduleRequest:
+      type: object
+      required:
+        - schedule_id
+        - version
+        - entries
+      properties:
+        schedule_id:
+          type: string
+        version:
+          type: integer
+          minimum: 1
+        entries:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ScheduleEntry'
+    ScheduleEntry:
+      type: object
+      required:
+        - entry_id
+        - title
+        - room
+        - start_time
+        - end_time
+      properties:
+        entry_id:
+          type: string
+        title:
+          type: string
+        room:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+    EditPublishScheduleSuccess:
+      type: object
+      required:
+        - status
+        - schedule_id
+        - version
+      properties:
+        status:
+          type: string
+          example: success
+        schedule_id:
+          type: string
+        version:
+          type: integer
+        message:
+          type: string
+    EditPublishScheduleError:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+        code:
+          type: string
+          description: validation_failed | storage_failed | announcement_failed
+        field_errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      type: object
+      required:
+        - field
+        - code
+        - message
+      properties:
+        field:
+          type: string
+        code:
+          type: string
+        message:
+          type: string

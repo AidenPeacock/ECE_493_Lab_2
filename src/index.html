@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conference Access</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1 class="page-title">Conference Account Access</h1>
+
+      <div class="layout-grid">
+        <section id="form-container" class="card" aria-live="polite">
+          <h2>Register User Account</h2>
+          <p class="helper">Fields marked <span aria-hidden="true">*</span> are required.</p>
+
+          <div id="error-summary" class="error-summary" hidden></div>
+
+          <form id="register-form" novalidate>
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+            <p id="email-error" class="field-error" hidden></p>
+
+            <label for="password">Password *</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" required />
+            <small class="helper">Minimum 8 characters with at least one letter and one number.</small>
+            <p id="password-error" class="field-error" hidden></p>
+
+            <label for="role">Role *</label>
+            <select id="role" name="role" required>
+              <option value="">Select a role</option>
+              <option value="author">Author</option>
+              <option value="reviewer">Reviewer</option>
+              <option value="editor">Editor</option>
+              <option value="attendee">Attendee</option>
+            </select>
+            <p id="role-error" class="field-error" hidden></p>
+
+            <button type="submit">Create account</button>
+          </form>
+        </section>
+
+        <section id="success-container" class="card success" hidden aria-live="polite">
+          <h2>Registration complete</h2>
+          <p id="success-message"></p>
+          <p>You can now sign in using your new account.</p>
+        </section>
+
+        <section id="login-form-container" class="card" aria-live="polite">
+          <h2>Log In</h2>
+          <p class="helper">Use a registered email and password.</p>
+
+          <div id="login-error-summary" class="error-summary" hidden></div>
+
+          <form id="login-form" novalidate>
+            <label for="login-email">Email *</label>
+            <input id="login-email" name="login-email" type="email" autocomplete="username" required />
+            <p id="login-email-error" class="field-error" hidden></p>
+
+            <label for="login-password">Password *</label>
+            <input
+              id="login-password"
+              name="login-password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+            <p id="login-password-error" class="field-error" hidden></p>
+
+            <button type="submit">Log in</button>
+          </form>
+        </section>
+
+        <section id="login-success-container" class="card success" hidden aria-live="polite">
+          <h2>Login complete</h2>
+          <p id="login-success-message"></p>
+          <p>Role-appropriate home view is available.</p>
+        </section>
+      </div>
+    </main>
+
+    <script type="module">
+      import { initRegistrationApp } from "./js/register.js";
+      import { initLoginApp } from "./js/002-log-in.js";
+
+      initRegistrationApp();
+      initLoginApp();
+    </script>
+  </body>
+</html>
