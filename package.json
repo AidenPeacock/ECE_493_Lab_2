@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test --experimental-test-coverage tests/register.test.js",
-    "lint": "node --check src/js/register.js && node --check tests/register.test.js"
+    "test": "node --test --experimental-test-coverage tests/*.test.js",
+    "lint": "node --check src/js/register.js && node --check src/js/002-log-in.js && node --check tests/register.test.js && node --check tests/login.test.js"
   }
 }

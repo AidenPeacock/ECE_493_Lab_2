@@ -20,9 +20,19 @@ body {
 }
 
 .page {
-  max-width: 640px;
+  max-width: 980px;
   margin: 2rem auto;
   padding: 0 1rem;
+}
+
+.page-title {
+  margin: 0 0 1rem;
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
 }
 
 .card {
@@ -90,9 +100,9 @@ button {
 .success {
   border-color: #8bd1b3;
   background: #f2fcf7;
-  margin-top: 1rem;
 }
 
-#success-message {
+#success-message,
+#login-success-message {
   color: var(--success);
 }
