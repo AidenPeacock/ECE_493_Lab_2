@@ -17,10 +17,10 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create base web app structure in `src/index.html`, `src/css/styles.css`, `src/js/011-edit-publish-schedule.js`
-- [ ] T002 Add base HTML shell and mounting containers in `src/index.html`
-- [ ] T003 [P] Add baseline layout and form styles in `src/css/styles.css`
-- [ ] T004 [P] Add JS module scaffolding and init hook in `src/js/011-edit-publish-schedule.js`
+- [X] T001 Create base web app structure in `src/index.html`, `src/css/styles.css`, `src/js/011-edit-publish-schedule.js`
+- [X] T002 Add base HTML shell and mounting containers in `src/index.html`
+- [X] T003 [P] Add baseline layout and form styles in `src/css/styles.css`
+- [X] T004 [P] Add JS module scaffolding and init hook in `src/js/011-edit-publish-schedule.js`
 - [ ] T005 [P] Confirm display instructions are correct in `/home/aiden/ECE_493_Lab_2/specs/011-edit-publish-schedule/quickstart.md`
 
 ---
@@ -29,11 +29,11 @@
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
 
-- [ ] T006 Define data model helpers for EditPublishScheduleRequest, ScheduleEntry, EditPublishScheduleResult, ValidationError, AuditLogEntry in `src/js/011-edit-publish-schedule.js`
-- [ ] T007 Implement LocalStorage adapter for schedule persistence and audit logging in `src/js/011-edit-publish-schedule.js`
-- [ ] T008 Implement validation utilities (required fields, time order, room/time collisions) in `src/js/011-edit-publish-schedule.js`
-- [ ] T009 Implement error rendering utilities (field-level + summary) in `src/js/011-edit-publish-schedule.js`
-- [ ] T010 Implement versioning/idempotency utilities (latest-only publish, double-submit guard) in `src/js/011-edit-publish-schedule.js`
+- [X] T006 Define data model helpers for EditPublishScheduleRequest, ScheduleEntry, EditPublishScheduleResult, ValidationError, AuditLogEntry in `src/js/011-edit-publish-schedule.js`
+- [X] T007 Implement LocalStorage adapter for schedule persistence and audit logging in `src/js/011-edit-publish-schedule.js`
+- [X] T008 Implement validation utilities (required fields, time order, room/time collisions) in `src/js/011-edit-publish-schedule.js`
+- [X] T009 Implement error rendering utilities (field-level + summary) in `src/js/011-edit-publish-schedule.js`
+- [X] T010 Implement versioning/idempotency utilities (latest-only publish, double-submit guard) in `src/js/011-edit-publish-schedule.js`
 - [ ] T011 Re-run acceptance test generation with updated instructions to refresh `acceptance_tests.md`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
@@ -48,11 +48,11 @@
 
 ### Implementation for User Story 1
 
-- [ ] T012 [US1] Build schedule editor UI (entries list, add/remove controls) in `src/index.html`
-- [ ] T013 [P] [US1] Add labels, helper text, and required markers in `src/index.html`
-- [ ] T014 [US1] Implement publish handler (validate, persist, success state, audit log) in `src/js/011-edit-publish-schedule.js`
-- [ ] T015 [US1] Implement success state/summary view (version, timestamp) in `src/js/011-edit-publish-schedule.js`
-- [ ] T016 [US1] Style primary success state and editor layout in `src/css/styles.css`
+- [X] T012 [US1] Build schedule editor UI (entries list, add/remove controls) in `src/index.html`
+- [X] T013 [P] [US1] Add labels, helper text, and required markers in `src/index.html`
+- [X] T014 [US1] Implement publish handler (validate, persist, success state, audit log) in `src/js/011-edit-publish-schedule.js`
+- [X] T015 [US1] Implement success state/summary view (version, timestamp) in `src/js/011-edit-publish-schedule.js`
+- [X] T016 [US1] Style primary success state and editor layout in `src/css/styles.css`
 
 **Checkpoint**: User Story 1 is fully functional and testable independently
 
@@ -66,12 +66,12 @@
 
 ### Implementation for User Story 2
 
-- [ ] T017 [US2] Add UI toggles for "Simulate Save Failure" and "Simulate Announcement Failure" in `src/index.html`
-- [ ] T018 [US2] Implement validation conflict handling and messaging in `src/js/011-edit-publish-schedule.js`
-- [ ] T019 [US2] Implement storage/save failure handling (service error, no save, retry required) in `src/js/011-edit-publish-schedule.js`
-- [ ] T020 [US2] Implement announcement failure handling (error, no state change, retry required) in `src/js/011-edit-publish-schedule.js`
-- [ ] T021 [US2] Implement retry/reset behavior for failed attempts in `src/js/011-edit-publish-schedule.js`
-- [ ] T022 [US2] Style error/exception states and toggle controls in `src/css/styles.css`
+- [X] T017 [US2] Add UI toggles for "Simulate Save Failure" and "Simulate Announcement Failure" in `src/index.html`
+- [X] T018 [US2] Implement validation conflict handling and messaging in `src/js/011-edit-publish-schedule.js`
+- [X] T019 [US2] Implement storage/save failure handling (service error, no save, retry required) in `src/js/011-edit-publish-schedule.js`
+- [X] T020 [US2] Implement announcement failure handling (error, no state change, retry required) in `src/js/011-edit-publish-schedule.js`
+- [X] T021 [US2] Implement retry/reset behavior for failed attempts in `src/js/011-edit-publish-schedule.js`
+- [X] T022 [US2] Style error/exception states and toggle controls in `src/css/styles.css`
 
 **Checkpoint**: User Story 2 is fully functional and testable independently
 
@@ -82,7 +82,7 @@
 **Purpose**: Improvements that affect multiple user stories
 
 - [ ] T023 [P] Verify audit/traceability data is recorded and refresh quickstart via `/speckit.plan` instructions in `/home/aiden/ECE_493_Lab_2/specs/011-edit-publish-schedule/quickstart.md`
-- [ ] T024 [P] Clean up UI copy and ensure consistent terminology in `src/index.html`
+- [X] T024 [P] Clean up UI copy and ensure consistent terminology in `src/index.html`
 
 ---
 
