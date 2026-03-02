@@ -1,0 +1,81 @@
+openapi: 3.0.3
+info:
+  title: Change Password API
+  version: 1.0.0
+  description: Contract for change password flow.
+servers:
+  - url: http://localhost
+paths:
+  /change-password:
+    post:
+      summary: Change user password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+      responses:
+        '200':
+          description: Password changed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordSuccess'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordError'
+        '401':
+          description: Incorrect current password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordError'
+        '500':
+          description: Update failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChangePasswordError'
+components:
+  schemas:
+    ChangePasswordRequest:
+      type: object
+      required: [current_password, new_password]
+      properties:
+        current_password:
+          type: string
+          minLength: 8
+        new_password:
+          type: string
+          minLength: 8
+    ChangePasswordSuccess:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+    ChangePasswordError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+        field_errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              code:
+                type: string
+              message:
+                type: string
