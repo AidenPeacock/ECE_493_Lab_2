@@ -485,6 +485,10 @@ test("init app supports explicit adapter branch", () => {
 
 test("init app submit flow covers success and failure", () => {
   const successStorage = new FakeStorage();
+  successStorage.setItem(
+    "ece493.session",
+    JSON.stringify({ email: "ref@example.com", role: "reviewer" })
+  );
   const successDoc = createDocumentMock();
   const successApp = initAcceptRejectReviewInvitationApp({ document: successDoc, storage: successStorage });
   assert.ok(successApp);
@@ -512,12 +516,16 @@ test("init app submit flow covers success and failure", () => {
 
   const failDoc = createDocumentMock();
   const failStorage = new FakeStorage();
+  failStorage.setItem(
+    "ece493.session",
+    JSON.stringify({ email: "reviewer@example.com", role: "reviewer" })
+  );
   const failApp = initAcceptRejectReviewInvitationApp({ document: failDoc, storage: failStorage });
   assert.ok(failApp);
 
   failDoc.elements["review-invitation-id"].value = "";
   failDoc.elements["review-invitation-paper-id"].value = "";
-  failDoc.elements["review-invitation-email"].value = "bad";
+  failDoc.elements["review-invitation-email"].value = "reviewer@example.com";
   failDoc.elements["review-invitation-decision"].value = "maybe";
   failDoc.elements["review-invitation-valid"].checked = false;
   failDoc.elements["review-invitation-expires-at"].value = "2030-01-01T00:00:00.000Z";
@@ -525,6 +533,87 @@ test("init app submit flow covers success and failure", () => {
   result = failDoc.form.listener();
   assert.equal(result.status, "validation_failed");
   assert.equal(failDoc.elements["review-invitation-error-summary"].hidden, false);
+});
+
+test("init app blocks unauthenticated, wrong-role, and mismatched reviewer users", () => {
+  const noSessionDoc = createDocumentMock();
+  const noSessionApp = initAcceptRejectReviewInvitationApp({
+    document: noSessionDoc,
+    storage: new FakeStorage()
+  });
+  assert.ok(noSessionApp);
+  noSessionDoc.elements["review-invitation-email"].value = "ref@example.com";
+  let result = noSessionDoc.form.listener();
+  assert.equal(result.status, "validation_failed");
+  assert.equal(result.errors[0].code, "not_authenticated");
+
+  const authorStorage = new FakeStorage();
+  authorStorage.setItem(
+    "ece493.session",
+    JSON.stringify({ email: "author@example.com", role: "author" })
+  );
+  const authorDoc = createDocumentMock();
+  const authorApp = initAcceptRejectReviewInvitationApp({ document: authorDoc, storage: authorStorage });
+  assert.ok(authorApp);
+  authorDoc.elements["review-invitation-email"].value = "author@example.com";
+  result = authorDoc.form.listener();
+  assert.equal(result.status, "validation_failed");
+  assert.equal(result.errors[0].code, "not_authorized");
+
+  const mismatchStorage = new FakeStorage();
+  mismatchStorage.setItem(
+    "ece493.session",
+    JSON.stringify({ email: "session@example.com", role: "reviewer" })
+  );
+  const mismatchDoc = createDocumentMock();
+  const mismatchApp = initAcceptRejectReviewInvitationApp({
+    document: mismatchDoc,
+    storage: mismatchStorage
+  });
+  assert.ok(mismatchApp);
+  mismatchDoc.elements["review-invitation-email"].value = "other@example.com";
+  result = mismatchDoc.form.listener();
+  assert.equal(result.status, "validation_failed");
+  assert.equal(result.errors[0].code, "mismatched_user");
+
+  const malformedStorage = new FakeStorage();
+  malformedStorage.setItem("ece493.session", "{bad-json");
+  const malformedDoc = createDocumentMock();
+  const malformedApp = initAcceptRejectReviewInvitationApp({
+    document: malformedDoc,
+    storage: malformedStorage
+  });
+  assert.ok(malformedApp);
+  malformedDoc.elements["review-invitation-email"].value = "ref@example.com";
+  result = malformedDoc.form.listener();
+  assert.equal(result.status, "validation_failed");
+  assert.equal(result.errors[0].code, "not_authenticated");
+
+  const invalidObjectStorage = new FakeStorage();
+  invalidObjectStorage.setItem("ece493.session", JSON.stringify({ email: "ref@example.com" }));
+  const invalidObjectDoc = createDocumentMock();
+  const invalidObjectApp = initAcceptRejectReviewInvitationApp({
+    document: invalidObjectDoc,
+    storage: invalidObjectStorage
+  });
+  assert.ok(invalidObjectApp);
+  invalidObjectDoc.elements["review-invitation-email"].value = "ref@example.com";
+  result = invalidObjectDoc.form.listener();
+  assert.equal(result.status, "validation_failed");
+  assert.equal(result.errors[0].code, "not_authenticated");
+
+  const nonObjectStorage = new FakeStorage();
+  nonObjectStorage.setItem("ece493.session", JSON.stringify("not-an-object"));
+  const nonObjectDoc = createDocumentMock();
+  const nonObjectApp = initAcceptRejectReviewInvitationApp({
+    document: nonObjectDoc,
+    storage: nonObjectStorage
+  });
+  assert.ok(nonObjectApp);
+  nonObjectDoc.elements["review-invitation-email"].value = "ref@example.com";
+  result = nonObjectDoc.form.listener();
+  assert.equal(result.status, "validation_failed");
+  assert.equal(result.errors[0].code, "not_authenticated");
 });
 
 test("init app submit handles event without preventDefault", () => {

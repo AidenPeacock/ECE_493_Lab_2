@@ -6,6 +6,7 @@ import {
   buildValidationError,
   clearLoginErrorState,
   createLoginStorageAdapter,
+  emitSessionChanged,
   generateId,
   initLoginApp,
   isValidEmailFormat,
@@ -347,4 +348,23 @@ test("fake storage write-failure branch is covered", () => {
   const storage = new FakeStorage();
   storage.failWrites = true;
   assert.throws(() => storage.setItem("x", "y"), /write failed/);
+});
+
+test("emitSessionChanged covers missing, successful, and throwing event targets", () => {
+  emitSessionChanged(null);
+  emitSessionChanged({});
+
+  let dispatched = false;
+  emitSessionChanged({
+    dispatchEvent(event) {
+      dispatched = event.type === "ece493:session-changed";
+    }
+  });
+  assert.equal(dispatched, true);
+
+  emitSessionChanged({
+    dispatchEvent() {
+      throw new Error("dispatch failed");
+    }
+  });
 });

@@ -244,6 +244,18 @@ export function showLoginSuccessView(elements, homeView) {
   elements.successMessage.textContent = `Authenticated. Redirecting to ${homeView}.`;
 }
 
+export function emitSessionChanged(eventTarget) {
+  if (!eventTarget || typeof eventTarget.dispatchEvent !== "function") {
+    return;
+  }
+
+  try {
+    eventTarget.dispatchEvent(new Event("ece493:session-changed"));
+  } catch {
+    // Ignore event dispatch failures in non-browser environments.
+  }
+}
+
 export function initLoginApp(options = {}) {
   const doc = options.document ?? (typeof document !== "undefined" ? document : null);
   if (!doc) {
@@ -258,6 +270,7 @@ export function initLoginApp(options = {}) {
   const storage =
     options.storage ??
     (typeof window !== "undefined" && window.localStorage ? window.localStorage : null);
+  const eventTarget = options.eventTarget ?? (typeof window !== "undefined" ? window : null);
 
   const adapter = options.adapter ?? createLoginStorageAdapter(storage);
 
@@ -290,12 +303,14 @@ export function initLoginApp(options = {}) {
       clearLoginErrorState(elements);
       showLoginSuccessView(elements, result.home_view);
       form.reset();
+      emitSessionChanged(eventTarget);
       return result;
     }
 
     renderLoginErrorState(result.errors, elements);
     adapter.clearSession();
     form.reset();
+    emitSessionChanged(eventTarget);
     return result;
   };
 

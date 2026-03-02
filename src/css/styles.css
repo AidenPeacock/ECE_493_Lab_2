@@ -45,6 +45,7 @@ body {
 
 label,
 input,
+textarea,
 select,
 button {
   width: 100%;
@@ -57,6 +58,7 @@ label {
 }
 
 input,
+textarea,
 select,
 button {
   margin-top: 0.35rem;
@@ -102,7 +104,22 @@ button {
   background: #f2fcf7;
 }
 
+.access-locked {
+  border-color: #f4d58d;
+  background: #fff9e8;
+}
+
 #success-message,
-#login-success-message {
+#login-success-message,
+#change-password-success-message,
+#submit-paper-success-message,
+#save-draft-success-message,
+#assign-referees-success-message,
+#review-invitation-success-message,
+#submit-review-success-message,
+#make-final-decision-success-message,
+#generate-schedule-success-message,
+#edit-publish-schedule-success-message,
+#pay-attendance-success-message {
   color: var(--success);
 }

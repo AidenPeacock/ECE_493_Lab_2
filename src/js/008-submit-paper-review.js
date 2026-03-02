@@ -1,6 +1,7 @@
 const STORAGE_KEYS = {
   reviews: "ece493.reviews",
-  audit: "ece493.audit"
+  audit: "ece493.audit",
+  session: "ece493.session"
 };
 
 export function normalizeText(value) {
@@ -26,6 +27,65 @@ function safeParseArray(raw) {
 
 export function buildValidationError(field, code, message) {
   return { field, code, message };
+}
+
+function parseSession(raw) {
+  if (!raw) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") {
+      return null;
+    }
+
+    const email = normalizeEmail(parsed.email);
+    const role = normalizeText(parsed.role).toLowerCase();
+    if (!email || !role) {
+      return null;
+    }
+
+    return { email, role };
+  } catch {
+    return null;
+  }
+}
+
+function loadSession(storage) {
+  if (!storage || typeof storage.getItem !== "function") {
+    return null;
+  }
+
+  return parseSession(storage.getItem(STORAGE_KEYS.session));
+}
+
+function validateReviewerAccess(refereeEmail, session) {
+  if (!session) {
+    return buildValidationError(
+      "system",
+      "not_authenticated",
+      "Log in as the assigned reviewer before submitting a review."
+    );
+  }
+
+  if (session.role !== "reviewer") {
+    return buildValidationError(
+      "system",
+      "not_authorized",
+      "Only reviewers can submit paper reviews."
+    );
+  }
+
+  if (refereeEmail && session.email !== normalizeEmail(refereeEmail)) {
+    return buildValidationError(
+      "referee_email",
+      "mismatched_user",
+      "Referee email must match the logged-in reviewer."
+    );
+  }
+
+  return null;
 }
 
 function hasInvalidChars(value) {
@@ -307,6 +367,7 @@ export function initSubmitPaperReviewApp(options = {}) {
   const onSubmit = (event) => {
     event?.preventDefault?.();
 
+    const session = loadSession(storage);
     const payload = {
       invitation_accepted: elements.inputs.invitation_accepted.checked,
       paper_id: elements.inputs.paper_id.value,
@@ -314,6 +375,16 @@ export function initSubmitPaperReviewApp(options = {}) {
       score: elements.inputs.score.value,
       comments: elements.inputs.comments.value
     };
+
+    const accessError = validateReviewerAccess(payload.referee_email, session);
+    if (accessError) {
+      renderSubmitPaperReviewErrorState([accessError], elements);
+      return {
+        status: "validation_failed",
+        message: "Validation failed.",
+        errors: [accessError]
+      };
+    }
 
     const result = submitPaperReview(payload, { adapter });
 

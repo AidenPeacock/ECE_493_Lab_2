@@ -28,6 +28,48 @@ const STORY_ACCESS_RULES = [
     successContainerId: "assign-referees-success-container",
     requiredRole: "editor",
     label: "Assign Referees"
+  },
+  {
+    key: "review-invitation",
+    formContainerId: "review-invitation-form-container",
+    successContainerId: "review-invitation-success-container",
+    requiredRole: "reviewer",
+    label: "Accept/Reject Review Invitation"
+  },
+  {
+    key: "submit-review",
+    formContainerId: "submit-review-form-container",
+    successContainerId: "submit-review-success-container",
+    requiredRole: "reviewer",
+    label: "Submit Paper Review"
+  },
+  {
+    key: "make-final-decision",
+    formContainerId: "make-final-decision-form-container",
+    successContainerId: "make-final-decision-success-container",
+    requiredRole: "editor",
+    label: "Make Final Decision"
+  },
+  {
+    key: "generate-schedule",
+    formContainerId: "generate-schedule-form-container",
+    successContainerId: "generate-schedule-success-container",
+    requiredRole: "editor",
+    label: "Generate Schedule"
+  },
+  {
+    key: "edit-publish-schedule",
+    formContainerId: "edit-publish-schedule-form-container",
+    successContainerId: "edit-publish-schedule-success-container",
+    requiredRole: "editor",
+    label: "Edit & Publish Schedule"
+  },
+  {
+    key: "pay-attendance",
+    formContainerId: "pay-attendance-form-container",
+    successContainerId: "pay-attendance-success-container",
+    requiredRole: "attendee",
+    label: "Pay for Attendance & Receive Ticket"
   }
 ];
 

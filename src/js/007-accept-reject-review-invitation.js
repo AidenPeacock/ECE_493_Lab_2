@@ -1,7 +1,8 @@
 const STORAGE_KEYS = {
   decisions: "ece493.reviewInvitationDecisions",
   reviewerPapers: "ece493.reviewerPapers",
-  audit: "ece493.audit"
+  audit: "ece493.audit",
+  session: "ece493.session"
 };
 
 const VALID_DECISIONS = ["accept", "reject"];
@@ -34,6 +35,65 @@ function safeParseArray(raw) {
 
 export function buildValidationError(field, code, message) {
   return { field, code, message };
+}
+
+function parseSession(raw) {
+  if (!raw) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") {
+      return null;
+    }
+
+    const email = normalizeEmail(parsed.email);
+    const role = normalizeText(parsed.role).toLowerCase();
+    if (!email || !role) {
+      return null;
+    }
+
+    return { email, role };
+  } catch {
+    return null;
+  }
+}
+
+function loadSession(storage) {
+  if (!storage || typeof storage.getItem !== "function") {
+    return null;
+  }
+
+  return parseSession(storage.getItem(STORAGE_KEYS.session));
+}
+
+function validateReviewerAccess(refereeEmail, session) {
+  if (!session) {
+    return buildValidationError(
+      "system",
+      "not_authenticated",
+      "Log in as the invited reviewer to manage review invitations."
+    );
+  }
+
+  if (session.role !== "reviewer") {
+    return buildValidationError(
+      "system",
+      "not_authorized",
+      "Only reviewers can manage review invitations."
+    );
+  }
+
+  if (refereeEmail && session.email !== normalizeEmail(refereeEmail)) {
+    return buildValidationError(
+      "referee_email",
+      "mismatched_user",
+      "Referee email must match the logged-in reviewer."
+    );
+  }
+
+  return null;
 }
 
 function isExpired(expiresAt, nowIso) {
@@ -371,6 +431,7 @@ export function initAcceptRejectReviewInvitationApp(options = {}) {
   const onSubmit = (event) => {
     event?.preventDefault?.();
 
+    const session = loadSession(storage);
     const payload = {
       invitation_id: elements.inputs.invitation_id.value,
       paper_id: elements.inputs.paper_id.value,
@@ -380,6 +441,16 @@ export function initAcceptRejectReviewInvitationApp(options = {}) {
       invitation_valid: elements.inputs.invitation_valid.checked,
       expires_at: elements.inputs.expires_at.value
     };
+
+    const accessError = validateReviewerAccess(payload.referee_email, session);
+    if (accessError) {
+      renderInvitationDecisionErrorState([accessError], elements);
+      return {
+        status: "validation_failed",
+        message: "Validation failed.",
+        errors: [accessError]
+      };
+    }
 
     const result = decideReviewInvitation(payload, { adapter });
 
