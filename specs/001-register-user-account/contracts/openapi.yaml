@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Register User Account API
+  version: 1.0.0
+  description: Contract for user registration flow.
+servers:
+  - url: http://localhost
+paths:
+  /register:
+    post:
+      summary: Register a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterSuccess'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterError'
+        '409':
+          description: Email already registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterError'
+        '500':
+          description: Storage failure
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterError'
+components:
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [email, password, role]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+        role:
+          type: string
+          enum: [author, reviewer, editor, attendee]
+    RegisterSuccess:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+        user_id:
+          type: string
+    RegisterError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+        field_errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              code:
+                type: string
+              message:
+                type: string

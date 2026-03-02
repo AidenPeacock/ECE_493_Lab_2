@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: Log In API
+  version: 1.0.0
+  description: Contract for log in flow.
+servers:
+  - url: http://localhost
+paths:
+  /login:
+    post:
+      summary: Log in a registered user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogInRequest'
+      responses:
+        '200':
+          description: Log in success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogInSuccess'
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogInError'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogInError'
+        '503':
+          description: Service unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogInError'
+components:
+  schemas:
+    LogInRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    LogInSuccess:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+    LogInError:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+        field_errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              code:
+                type: string
+              message:
+                type: string
