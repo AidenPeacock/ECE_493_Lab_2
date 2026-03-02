@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conference Access</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1 class="page-title">Conference Account Access</h1>
+
+      <div class="layout-grid">
+        <section id="form-container" class="card" aria-live="polite">
+          <h2>Register User Account</h2>
+          <p class="helper">Fields marked <span aria-hidden="true">*</span> are required.</p>
+
+          <div id="error-summary" class="error-summary" hidden></div>
+
+          <form id="register-form" novalidate>
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+            <p id="email-error" class="field-error" hidden></p>
+
+            <label for="password">Password *</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" required />
+            <small class="helper">Minimum 8 characters with at least one letter and one number.</small>
+            <p id="password-error" class="field-error" hidden></p>
+
+            <label for="role">Role *</label>
+            <select id="role" name="role" required>
+              <option value="">Select a role</option>
+              <option value="author">Author</option>
+              <option value="reviewer">Reviewer</option>
+              <option value="editor">Editor</option>
+              <option value="attendee">Attendee</option>
+            </select>
+            <p id="role-error" class="field-error" hidden></p>
+
+            <button type="submit">Create account</button>
+          </form>
+        </section>
+
+        <section id="success-container" class="card success" hidden aria-live="polite">
+          <h2>Registration complete</h2>
+          <p id="success-message"></p>
+          <p>You can now sign in using your new account.</p>
+        </section>
+
+        <section id="login-form-container" class="card" aria-live="polite">
+          <h2>Log In</h2>
+          <p class="helper">Use a registered email and password.</p>
+
+          <div id="login-error-summary" class="error-summary" hidden></div>
+
+          <form id="login-form" novalidate>
+            <label for="login-email">Email *</label>
+            <input id="login-email" name="login-email" type="email" autocomplete="username" required />
+            <p id="login-email-error" class="field-error" hidden></p>
+
+            <label for="login-password">Password *</label>
+            <input
+              id="login-password"
+              name="login-password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+            <p id="login-password-error" class="field-error" hidden></p>
+
+            <button type="submit">Log in</button>
+          </form>
+        </section>
+
+        <section id="login-success-container" class="card success" hidden aria-live="polite">
+          <h2>Login complete</h2>
+          <p id="login-success-message"></p>
+          <p>Role-appropriate home view is available.</p>
+        </section>
+
+        <section id="change-password-form-container" class="card" aria-live="polite">
+          <h2>Change Password</h2>
+          <p class="helper">You must be logged in to change password.</p>
+
+          <div id="change-password-error-summary" class="error-summary" hidden></div>
+
+          <form id="change-password-form" novalidate>
+            <label for="current-password">Current Password *</label>
+            <input
+              id="current-password"
+              name="current-password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+            <p id="current-password-error" class="field-error" hidden></p>
+
+            <label for="new-password">New Password *</label>
+            <input
+              id="new-password"
+              name="new-password"
+              type="password"
+              autocomplete="new-password"
+              required
+            />
+            <small class="helper">Minimum 8 characters with at least one letter and one number.</small>
+            <p id="new-password-error" class="field-error" hidden></p>
+
+            <button type="submit">Change password</button>
+          </form>
+        </section>
+
+        <section id="change-password-success-container" class="card success" hidden aria-live="polite">
+          <h2>Password changed</h2>
+          <p id="change-password-success-message"></p>
+          <p>You can continue using your account with the new password.</p>
+        </section>
+
+        <section id="submit-paper-form-container" class="card" aria-live="polite">
+          <h2>Submit Paper Manuscript</h2>
+          <p class="helper">Provide all required metadata and a manuscript file (max 7MB).</p>
+
+          <div id="submit-paper-error-summary" class="error-summary" hidden></div>
+
+          <form id="submit-paper-form" novalidate>
+            <label for="submit-paper-authors">Authors *</label>
+            <input id="submit-paper-authors" name="submit-paper-authors" type="text" required />
+            <p id="submit-paper-authors-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-affiliations">Affiliations *</label>
+            <input id="submit-paper-affiliations" name="submit-paper-affiliations" type="text" required />
+            <p id="submit-paper-affiliations-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-contact-email">Contact Email *</label>
+            <input id="submit-paper-contact-email" name="submit-paper-contact-email" type="email" required />
+            <p id="submit-paper-contact-email-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-abstract">Abstract *</label>
+            <textarea id="submit-paper-abstract" name="submit-paper-abstract" rows="4" required></textarea>
+            <p id="submit-paper-abstract-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-keywords">Keywords *</label>
+            <input id="submit-paper-keywords" name="submit-paper-keywords" type="text" required />
+            <p id="submit-paper-keywords-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-main-source">Main Source *</label>
+            <select id="submit-paper-main-source" name="submit-paper-main-source" required>
+              <option value="">Select source</option>
+              <option value="pdf">PDF</option>
+              <option value="word">Word</option>
+              <option value="latex">LaTeX</option>
+            </select>
+            <p id="submit-paper-main-source-error" class="field-error" hidden></p>
+
+            <label for="submit-paper-file">Manuscript File *</label>
+            <input id="submit-paper-file" name="submit-paper-file" type="file" accept=".pdf,.doc,.docx,.tex" required />
+            <p id="submit-paper-file-error" class="field-error" hidden></p>
+
+            <button type="submit">Submit manuscript</button>
+          </form>
+        </section>
+
+        <section id="submit-paper-success-container" class="card success" hidden aria-live="polite">
+          <h2>Submission complete</h2>
+          <p id="submit-paper-success-message"></p>
+          <p>Your manuscript has been stored successfully.</p>
+        </section>
+
+        <section id="save-draft-form-container" class="card" aria-live="polite">
+          <h2>Save Submission Draft</h2>
+          <p class="helper">Save your draft and return later to complete submission.</p>
+
+          <div id="save-draft-error-summary" class="error-summary" hidden></div>
+
+          <form id="save-draft-form" novalidate>
+            <label for="save-draft-title">Draft Title *</label>
+            <input id="save-draft-title" name="save-draft-title" type="text" required />
+            <p id="save-draft-title-error" class="field-error" hidden></p>
+
+            <label for="save-draft-contact-email">Contact Email *</label>
+            <input id="save-draft-contact-email" name="save-draft-contact-email" type="email" required />
+            <p id="save-draft-contact-email-error" class="field-error" hidden></p>
+
+            <label for="save-draft-abstract">Abstract</label>
+            <textarea id="save-draft-abstract" name="save-draft-abstract" rows="4"></textarea>
+
+            <label for="save-draft-keywords">Keywords</label>
+            <input id="save-draft-keywords" name="save-draft-keywords" type="text" />
+            <small class="helper">Use comma-separated keywords without empty entries.</small>
+            <p id="save-draft-keywords-error" class="field-error" hidden></p>
+
+            <label for="save-draft-main-source">Main Source</label>
+            <select id="save-draft-main-source" name="save-draft-main-source">
+              <option value="">Select source</option>
+              <option value="pdf">PDF</option>
+              <option value="word">Word</option>
+              <option value="latex">LaTeX</option>
+            </select>
+
+            <button type="submit">Save draft</button>
+          </form>
+        </section>
+
+        <section id="save-draft-success-container" class="card success" hidden aria-live="polite">
+          <h2>Draft saved</h2>
+          <p id="save-draft-success-message"></p>
+          <p>You can continue editing this draft later.</p>
+        </section>
+      </div>
+    </main>
+
+    <script type="module">
+      import { initRegistrationApp } from "./js/register.js";
+      import { initLoginApp } from "./js/002-log-in.js";
+      import { initChangePasswordApp } from "./js/003-change-password.js";
+      import { initSubmitPaperManuscriptApp } from "./js/004-submit-paper-manuscript.js";
+      import { initSaveSubmissionDraftApp } from "./js/005-save-submission-draft.js";
+
+      initRegistrationApp();
+      initLoginApp();
+      initChangePasswordApp();
+      initSubmitPaperManuscriptApp();
+      initSaveSubmissionDraftApp();
+    </script>
+  </body>
+</html>
