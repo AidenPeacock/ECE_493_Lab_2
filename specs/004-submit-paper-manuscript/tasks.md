@@ -17,11 +17,11 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create base web app structure in `src/index.html`, `src/css/styles.css`, `src/js/004-submit-paper-manuscript.js`
-- [ ] T002 Add base HTML shell and mounting containers in `src/index.html`
-- [ ] T003 [P] Add baseline layout and form styles in `src/css/styles.css`
-- [ ] T004 [P] Add JS module scaffolding and init hook in `src/js/004-submit-paper-manuscript.js`
-- [ ] T005 [P] Confirm display instructions are correct in `/home/aiden/ECE_493_Lab_2/specs/004-submit-paper-manuscript/quickstart.md`
+- [X] T001 Create base web app structure in `src/index.html`, `src/css/styles.css`, `src/js/004-submit-paper-manuscript.js`
+- [X] T002 Add base HTML shell and mounting containers in `src/index.html`
+- [X] T003 [P] Add baseline layout and form styles in `src/css/styles.css`
+- [X] T004 [P] Add JS module scaffolding and init hook in `src/js/004-submit-paper-manuscript.js`
+- [X] T005 [P] Confirm display instructions are correct in `/home/aiden/ECE_493_Lab_2/specs/004-submit-paper-manuscript/quickstart.md`
 
 ---
 
@@ -29,10 +29,10 @@
 
 **Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
 
-- [ ] T006 Define data model helpers for SubmitPaperManuscriptRequest, SubmitPaperManuscriptResult, ValidationError in `src/js/004-submit-paper-manuscript.js`
-- [ ] T007 Implement LocalStorage adapter for persistence/audit in `src/js/004-submit-paper-manuscript.js`
-- [ ] T008 Implement validation utilities for required inputs in `src/js/004-submit-paper-manuscript.js`
-- [ ] T009 Implement error rendering utilities (field-level + summary) in `src/js/004-submit-paper-manuscript.js`
+- [X] T006 Define data model helpers for SubmitPaperManuscriptRequest, SubmitPaperManuscriptResult, ValidationError in `src/js/004-submit-paper-manuscript.js`
+- [X] T007 Implement LocalStorage adapter for persistence/audit in `src/js/004-submit-paper-manuscript.js`
+- [X] T008 Implement validation utilities for required inputs in `src/js/004-submit-paper-manuscript.js`
+- [X] T009 Implement error rendering utilities (field-level + summary) in `src/js/004-submit-paper-manuscript.js`
 - [ ] T010 Re-run acceptance test generation with updated instructions to refresh `acceptance_tests.md`
 
 **Checkpoint**: Foundation ready - user story implementation can now begin
@@ -49,11 +49,11 @@
 
 ### Implementation for User Story 1
 
-- [ ] T011 [US1] Build primary UI and inputs for `Submit Paper Manuscript` in `src/index.html`
-- [ ] T012 [P] [US1] Add labels, helper text, and required markers in `src/index.html`
-- [ ] T013 [US1] Implement primary flow handler (validate, persist, success state) in `src/js/004-submit-paper-manuscript.js`
-- [ ] T014 [US1] Implement success state/redirect view in `src/js/004-submit-paper-manuscript.js`
-- [ ] T015 [US1] Style primary success state in `src/css/styles.css`
+- [X] T011 [US1] Build primary UI and inputs for `Submit Paper Manuscript` in `src/index.html`
+- [X] T012 [P] [US1] Add labels, helper text, and required markers in `src/index.html`
+- [X] T013 [US1] Implement primary flow handler (validate, persist, success state) in `src/js/004-submit-paper-manuscript.js`
+- [X] T014 [US1] Implement success state/redirect view in `src/js/004-submit-paper-manuscript.js`
+- [X] T015 [US1] Style primary success state in `src/css/styles.css`
 
 **Checkpoint**: User Story 1 is fully functional and testable independently
 
@@ -69,12 +69,12 @@
 
 ### Implementation for User Story 2
 
-- [ ] T016 [US2] Implement validation failure handling and messaging in `src/js/004-submit-paper-manuscript.js`
-- [ ] T017 [US2] Implement invalid file type handling in `src/js/004-submit-paper-manuscript.js`
-- [ ] T018 [US2] Implement file-size limit handling (>7MB) in `src/js/004-submit-paper-manuscript.js`
-- [ ] T019 [US2] Implement upload/storage failure handling in `src/js/004-submit-paper-manuscript.js`
-- [ ] T020 [US2] Implement retry/reset behavior for failed attempts in `src/js/004-submit-paper-manuscript.js`
-- [ ] T021 [US2] Style error/exception states in `src/css/styles.css`
+- [X] T016 [US2] Implement validation failure handling and messaging in `src/js/004-submit-paper-manuscript.js`
+- [X] T017 [US2] Implement invalid file type handling in `src/js/004-submit-paper-manuscript.js`
+- [X] T018 [US2] Implement file-size limit handling (>7MB) in `src/js/004-submit-paper-manuscript.js`
+- [X] T019 [US2] Implement upload/storage failure handling in `src/js/004-submit-paper-manuscript.js`
+- [X] T020 [US2] Implement retry/reset behavior for failed attempts in `src/js/004-submit-paper-manuscript.js`
+- [X] T021 [US2] Style error/exception states in `src/css/styles.css`
 - [ ] T022 [US2] Re-run `/speckit.plan` with updated instructions to refresh `/home/aiden/ECE_493_Lab_2/specs/004-submit-paper-manuscript/quickstart.md`
 
 **Checkpoint**: User Story 2 is fully functional and testable independently
@@ -86,8 +86,8 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T023 [P] Verify audit/traceability data is recorded and refresh quickstart via `/speckit.plan` instructions in `/home/aiden/ECE_493_Lab_2/specs/004-submit-paper-manuscript/quickstart.md`
-- [ ] T024 [P] Clean up UI copy and ensure consistent terminology in `src/index.html`
+- [X] T023 [P] Verify audit/traceability data is recorded and refresh quickstart via `/speckit.plan` instructions in `/home/aiden/ECE_493_Lab_2/specs/004-submit-paper-manuscript/quickstart.md`
+- [X] T024 [P] Clean up UI copy and ensure consistent terminology in `src/index.html`
 
 ---
 
