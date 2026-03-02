@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register User Account</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section id="form-container" class="card" aria-live="polite">
+        <h1>Register User Account</h1>
+        <p class="helper">Fields marked <span aria-hidden="true">*</span> are required.</p>
+
+        <div id="error-summary" class="error-summary" hidden></div>
+
+        <form id="register-form" novalidate>
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+          <p id="email-error" class="field-error" hidden></p>
+
+          <label for="password">Password *</label>
+          <input id="password" name="password" type="password" autocomplete="new-password" required />
+          <small class="helper">Minimum 8 characters with at least one letter and one number.</small>
+          <p id="password-error" class="field-error" hidden></p>
+
+          <label for="role">Role *</label>
+          <select id="role" name="role" required>
+            <option value="">Select a role</option>
+            <option value="author">Author</option>
+            <option value="reviewer">Reviewer</option>
+            <option value="editor">Editor</option>
+            <option value="attendee">Attendee</option>
+          </select>
+          <p id="role-error" class="field-error" hidden></p>
+
+          <button type="submit">Create account</button>
+        </form>
+      </section>
+
+      <section id="success-container" class="card success" hidden aria-live="polite">
+        <h2>Registration complete</h2>
+        <p id="success-message"></p>
+        <p>You can proceed to the login page.</p>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initRegistrationApp } from "./js/register.js";
+      initRegistrationApp();
+    </script>
+  </body>
+</html>
