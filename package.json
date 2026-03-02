@@ -5,6 +5,6 @@
   "type": "module",
   "scripts": {
     "test": "node --test --experimental-test-coverage tests/*.test.js",
-    "lint": "node --check src/js/register.js && node --check src/js/002-log-in.js && node --check tests/register.test.js && node --check tests/login.test.js"
+    "lint": "node --check src/js/register.js && node --check src/js/002-log-in.js && node --check src/js/003-change-password.js && node --check tests/register.test.js && node --check tests/login.test.js && node --check tests/change-password.test.js"
   }
 }

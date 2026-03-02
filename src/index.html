@@ -77,15 +77,55 @@
           <p id="login-success-message"></p>
           <p>Role-appropriate home view is available.</p>
         </section>
+
+        <section id="change-password-form-container" class="card" aria-live="polite">
+          <h2>Change Password</h2>
+          <p class="helper">You must be logged in to change password.</p>
+
+          <div id="change-password-error-summary" class="error-summary" hidden></div>
+
+          <form id="change-password-form" novalidate>
+            <label for="current-password">Current Password *</label>
+            <input
+              id="current-password"
+              name="current-password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+            <p id="current-password-error" class="field-error" hidden></p>
+
+            <label for="new-password">New Password *</label>
+            <input
+              id="new-password"
+              name="new-password"
+              type="password"
+              autocomplete="new-password"
+              required
+            />
+            <small class="helper">Minimum 8 characters with at least one letter and one number.</small>
+            <p id="new-password-error" class="field-error" hidden></p>
+
+            <button type="submit">Change password</button>
+          </form>
+        </section>
+
+        <section id="change-password-success-container" class="card success" hidden aria-live="polite">
+          <h2>Password changed</h2>
+          <p id="change-password-success-message"></p>
+          <p>You can continue using your account with the new password.</p>
+        </section>
       </div>
     </main>
 
     <script type="module">
       import { initRegistrationApp } from "./js/register.js";
       import { initLoginApp } from "./js/002-log-in.js";
+      import { initChangePasswordApp } from "./js/003-change-password.js";
 
       initRegistrationApp();
       initLoginApp();
+      initChangePasswordApp();
     </script>
   </body>
 </html>
